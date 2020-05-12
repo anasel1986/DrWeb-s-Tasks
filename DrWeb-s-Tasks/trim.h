@@ -22,3 +22,5 @@
 void TrimRight(char *s);
 
 void TestTrimRight();
+
+bool AreStringsEqual(const char* str1, const char* str2);

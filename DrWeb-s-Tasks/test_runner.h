@@ -1,17 +1,25 @@
 #pragma once
 
+#include <sstream>
+#include <stdexcept>
 #include <string>
 #include <iostream>
+#include <iomanip>
 
-using std::string;
-using std::cerr;
-using std::endl;
+using namespace std;
 
 #define ASSERT_EQUAL(x, y) {            \
   ostringstream os;                     \
   os << #x << " != " << #y << ", "      \
     << __FILE__ << ":" << __LINE__;     \
   AssertEqual(x, y, os.str());          \
+}
+
+#define ASSERT(x) {                     \
+  ostringstream os;                     \
+  os << #x << " is false, "             \
+    << __FILE__ << ":" << __LINE__;     \
+  Assert(x, os.str());                  \
 }
 
 #define RUN_TEST(tr, func) \
@@ -21,12 +29,17 @@ template<typename T, typename U>
 void AssertEqual(const T& t, const U& u, const string& hint = {}) {
 	if (!(t == u)) {
 		ostringstream os;
+		os << boolalpha;
 		os << "Assertion failed: " << t << " != " << u;
 		if (!hint.empty()) {
 			os << " hint: " << hint;
 		}
 		throw runtime_error(os.str());
 	}
+}
+
+inline void Assert(bool b, const string& hint) {
+	AssertEqual(b, true, hint);
 }
 
 class TestRunner {
@@ -49,7 +62,7 @@ public:
 
 	~TestRunner() {
 		if (fail_count > 0) {
-			cerr << fail_count << " unit tests failed. Terminate" << endl;
+			cerr << fail_count << " unit test(s) failed. Terminate" << endl;
 			exit(1);
 		}
 	}
