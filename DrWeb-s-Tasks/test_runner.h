@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include <vector>
 
 using namespace std;
 
@@ -25,7 +26,7 @@ using namespace std;
 #define RUN_TEST(tr, func) \
   tr.RunTest(func, #func)
 
-template <class T>
+template <typename T>
 ostream& operator << (ostream& os, const vector<T>& s) {
 	os << "{";
 	bool first = true;

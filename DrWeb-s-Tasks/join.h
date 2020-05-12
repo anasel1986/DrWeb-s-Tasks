@@ -30,3 +30,4 @@ void join(vector<int>& from, vector<int>& to);
 */
 void joinVectors(vector<int>& v1, vector<int>& v2, vector<int>& to);
 
+void TestJoin();

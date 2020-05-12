@@ -1,4 +1,5 @@
 #include "trim.h"
+#include "join.h"
 #include "test_runner.h"
 
 void RunTests();
@@ -13,4 +14,5 @@ void RunTests()
 {
 	TestRunner tr;
 	RUN_TEST(tr, TestTrimRight);
+	RUN_TEST(tr, TestJoin);
 }

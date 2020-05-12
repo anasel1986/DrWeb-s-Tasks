@@ -6,6 +6,7 @@
 */
 
 #include "join.h"
+#include "test_runner.h"
 
 
 /**
@@ -71,4 +72,57 @@ void joinVectors(vector<int>& v1, vector<int>& v2, vector<int>& to)
 		}
 		to[sTo] = (v1[s1] > v2[s2]) ? v1[s1--] : v2[s2--];	
 	}
+}
+
+void TestJoin()
+{
+	vector<int> from = { 1,2,3 };
+	vector<int> to = { 4,5,6 };
+	join(from, to);
+	vector <int> expected = { 1, 2, 3, 4, 5, 6 };
+	ASSERT_EQUAL(to, expected);
+	   
+	from = { 4,5,6 };
+	to = { 1,2,3 };
+	to.reserve(6);
+	join(from, to);
+	expected = { 1, 2, 3, 4, 5, 6 };
+	ASSERT_EQUAL(to, expected);
+
+	from = { 2,3,5,10 };
+	to = { 1, 6, 7, 13 };
+	join(from, to);
+	expected = { 1, 2, 3, 5, 6, 7, 10, 13 };
+	ASSERT_EQUAL(to, expected);
+
+	from = { 2,5,6 };
+	to = { 1,2,3 };
+	join(from, to);
+	expected = { 1, 2, 2, 3, 5, 6 };
+	ASSERT_EQUAL(to, expected);
+
+	from = { 3 };
+	to = { 1,2,4 };
+	join(from, to);
+	expected = { 1, 2, 3, 4 };
+	ASSERT_EQUAL(to, expected);
+
+	from = { 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33 };
+	to = { 3 };
+	join(from, to);
+	expected = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33 };
+	ASSERT_EQUAL(to, expected);
+	
+
+	from = { 1,2,3 };
+	to = { 4,5,6 };
+	join(from, to);
+	expected = { 1, 2, 3, 4, 5, 6 };
+	ASSERT_EQUAL(to, expected);
+
+	from = { 4,5,6 };
+	to = { 1,2,3 };
+	join(from, to);
+	expected = { 1, 2, 3, 4, 5, 6 };
+	ASSERT_EQUAL(to, expected);
 }
