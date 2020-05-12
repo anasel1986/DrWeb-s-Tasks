@@ -25,6 +25,20 @@ using namespace std;
 #define RUN_TEST(tr, func) \
   tr.RunTest(func, #func)
 
+template <class T>
+ostream& operator << (ostream& os, const vector<T>& s) {
+	os << "{";
+	bool first = true;
+	for (const auto& x : s) {
+		if (!first) {
+			os << ", ";
+		}
+		first = false;
+		os << x;
+	}
+	return os << "}";
+}
+
 template<typename T, typename U>
 void AssertEqual(const T& t, const U& u, const string& hint = {}) {
 	if (!(t == u)) {
